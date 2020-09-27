@@ -29,14 +29,8 @@ public class AsyncTaskController2 {
         task1 = asyncTaskService2.asyncTask1();
         task2 = asyncTaskService2.asyncTask2();
         task3 = asyncTaskService2.asyncTask3();
-        status = "";
-        assert task1 != null;
-        if (task1.isDone() && task2.isDone() && task3.isDone()) {
-            status = "async tasks are done.";
-        } else {
-            status = "async tasks are doing.";
-        }
         long endTimeStamp = System.currentTimeMillis();
+        status = "async tasks are doing.";
         String message = "async tasks are triggered successfully, duration: " + (endTimeStamp - startTimeStamp) + " ms";
         System.out.println(message);
         return message;
@@ -45,6 +39,10 @@ public class AsyncTaskController2 {
     @GetMapping("/task/status")
     @ResponseBody
     public String getTasksStatus() {
+        assert task1 != null;
+        if (task1.isDone() && task2.isDone() && task3.isDone()) {
+            status = "async tasks are done.";
+        }
         return status;
     }
 
